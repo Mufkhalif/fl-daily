@@ -7,7 +7,7 @@ import 'package:klikdaily/presentation/pages/tabs/home.dart';
 import 'package:klikdaily/themes/theme.dart';
 
 class HomePage extends StatefulWidget {
-  static const routeName = "/";
+  static const routeName = "/home-page";
 
   const HomePage({Key? key}) : super(key: key);
 

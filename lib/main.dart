@@ -4,6 +4,7 @@ import 'package:klikdaily/domain/models/fruit.dart';
 import 'package:klikdaily/presentation/blocs/cart/cart_bloc.dart';
 import 'package:klikdaily/presentation/blocs/profile/profile_bloc.dart';
 import 'package:klikdaily/presentation/blocs/search/search_bloc.dart';
+import 'package:klikdaily/presentation/pages/app_intro_page.dart';
 import 'package:klikdaily/presentation/pages/search_page.dart';
 import 'package:klikdaily/presentation/pages/detail_page.dart';
 import 'package:klikdaily/presentation/pages/home_page.dart';
@@ -36,12 +37,15 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
+        // home: const HomePage(),
+        home: AppIntroPage(),
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case HomePage.routeName:
               return MaterialPageRoute(builder: (_) => const HomePage());
+            case AppIntroPage.routeName:
+              return MaterialPageRoute(builder: (_) => const AppIntroPage());
             case SearchPage.routeName:
               return MaterialPageRoute(builder: (_) => const SearchPage());
             case DetailPage.routeName:
@@ -51,7 +55,8 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (_) {
                   return const Scaffold(
-                      body: Center(child: Text('Page not found :(')));
+                    body: Center(child: Text('Page not found :(')),
+                  );
                 },
               );
           }

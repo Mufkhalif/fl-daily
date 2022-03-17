@@ -98,30 +98,5 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<SetCurrentMessage>((event, emit) {
       emit(state.copyWith(message: ""));
     });
-
-    // on<AddFruitToCartByTotal>((event, emit) async {
-    //   final result = await repository.isAddedInCart(event.fruit.id);
-
-    //   await result.fold(
-    //     (failure) async {
-    //       final resAdd = await repository.addCart(event.fruit);
-
-    //       resAdd.fold(
-    //         (failure) => null,
-    //         (message) => emit(state.copyWith(message: message)),
-    //       );
-    //     },
-    //     (fruit) async {
-    //       final updateFruit = fruit.copyWith(totalItems: fruit.totalItems + 1);
-
-    //       final resUpdate = await repository.updateTotalItemsFruit(updateFruit);
-
-    //       resUpdate.fold(
-    //         (failure) => emit(state.copyWith(message: failure.message)),
-    //         (message) => emit(state.copyWith(message: message)),
-    //       );
-    //     },
-    //   );
-    // });
   }
 }

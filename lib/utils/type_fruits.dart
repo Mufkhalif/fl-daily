@@ -78,7 +78,7 @@ List<TabItem> listTabItem = [
     typeFruit: TypeFruit.onion,
   ),
   TabItem(
-    name: "Kol",
+    name: "Sawi",
     typeFruit: TypeFruit.cauliflower,
   ),
   TabItem(
