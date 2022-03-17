@@ -24,34 +24,13 @@ void init() {
   locator.registerLazySingleton<FruitLocalDataSource>(
       () => FruitLocalDataSourceImpl(locator()));
 
-  // locator.registerLazySingleton<TvRemoteDataSource>(
-  //     () => TvRemoteDataSourceImp(locator()));
-
-  // locator.registerLazySingleton<TvLocalDataSource>(
-  //     () => TvLocalDataSourceImpl(databaseHelper: locator()));
-
   // helper
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   //http
   locator.registerLazySingleton(() => http.Client());
 
-  //blocs movie
+  //blocs
   locator.registerFactory(() => CartBloc(locator()));
   locator.registerFactory(() => ProfileBloc(locator()));
-
-  // locator.registerFactory(() => MoviePopularBloc(locator()));
-  // locator.registerFactory(() => MovieTopRatedBloc(locator()));
-  // locator.registerFactory(() => MovieDetailBloc(locator()));
-  // locator.registerFactory(() => MovieWatchlistBloc(locator()));
-  // locator.registerFactory(() => CastDetailBloc(locator()));
-  // locator.registerFactory(() => MovieSearchBloc(locator()));
-
-  //blocs tv
-  // locator.registerFactory(() => TvNowPlayingBloc(locator()));
-  // locator.registerFactory(() => TvPopularBloc(locator()));
-  // locator.registerFactory(() => TvTopRatedBloc(locator()));
-  // locator.registerFactory(() => TvDetailBloc(locator()));
-  // locator.registerFactory(() => TvWatchlistBloc(locator()));
-  // locator.registerFactory(() => TvSearchBloc(locator()));
 }

@@ -137,3 +137,36 @@ class CardFruit extends StatelessWidget {
     );
   }
 }
+
+class ContainerListAll extends StatelessWidget {
+  const ContainerListAll({
+    Key? key,
+    required this.fruits,
+  }) : super(key: key);
+
+  final List<Fruit> fruits;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: 2,
+      mainAxisSpacing: 1,
+      childAspectRatio: (1 / 1.3),
+      shrinkWrap: true,
+      children: _renderItems(),
+    );
+  }
+
+  List<Widget> _renderItems() {
+    List<Widget> items = [];
+
+    for (var i = 0; i < fruits.length; i++) {
+      items.add(CardFruit(
+        index: i,
+        fruit: fruits[i],
+      ));
+    }
+
+    return items;
+  }
+}

@@ -4,6 +4,7 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:klikdaily/presentation/blocs/cart/cart_bloc.dart';
+import 'package:klikdaily/presentation/pages/search_page.dart';
 import 'package:klikdaily/themes/theme.dart';
 import 'package:klikdaily/utils/type_fruits.dart';
 import 'package:klikdaily/widgets/container_list_type.dart';
@@ -79,27 +80,31 @@ class _HomeTabState extends State<HomeTab> {
                 const SizedBox(
                   height: 24,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 12,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.search, color: dark.withOpacity(0.5)),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      Text(
-                        'Cari sayuran ...',
-                        style: regular.copyWith(
-                            fontSize: 14, color: dark.withOpacity(0.5)),
-                      ),
-                    ],
+                GestureDetector(
+                  onTap: () =>
+                      Navigator.pushNamed(context, SearchPage.routeName),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 12,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.search, color: dark.withOpacity(0.5)),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          'Cari sayuran ...',
+                          style: regular.copyWith(
+                              fontSize: 14, color: dark.withOpacity(0.5)),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(

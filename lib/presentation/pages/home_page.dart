@@ -85,6 +85,6 @@ class _HomePageState extends State<HomePage> {
             ? const HomeTab()
             : _selectedIndex == 1
                 ? const CartTab()
-                : AccountTab());
+                : const AccountTab());
   }
 }

@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:klikdaily/domain/models/fruit.dart';
 import 'package:klikdaily/presentation/blocs/cart/cart_bloc.dart';
 import 'package:klikdaily/presentation/blocs/profile/profile_bloc.dart';
+import 'package:klikdaily/presentation/blocs/search/search_bloc.dart';
+import 'package:klikdaily/presentation/pages/search_page.dart';
 import 'package:klikdaily/presentation/pages/tabs/account.dart';
 import 'package:klikdaily/presentation/pages/tabs/cart.dart';
 import 'package:klikdaily/presentation/pages/detail_page.dart';
@@ -30,16 +32,20 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<ProfileBloc>(),
         ),
+        BlocProvider(
+          create: (_) => SearchBloc(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        // home: AccountPage(),
         home: HomePage(),
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case HomePage.routeName:
               return MaterialPageRoute(builder: (_) => const HomePage());
+            case SearchPage.routeName:
+              return MaterialPageRoute(builder: (_) => const SearchPage());
             case DetailPage.routeName:
               final item = settings.arguments as Fruit;
               return MaterialPageRoute(builder: (_) => DetailPage(fruit: item));

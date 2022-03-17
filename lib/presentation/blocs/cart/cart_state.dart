@@ -4,10 +4,12 @@ class CartState extends Equatable {
   const CartState({
     this.message = "",
     this.fruits = const [],
+    this.requestState = RequestState.Empty,
   });
 
   final String message;
   final List<Fruit> fruits;
+  final RequestState requestState;
 
   CartState copyWith({
     String? message,
@@ -17,6 +19,7 @@ class CartState extends Equatable {
       CartState(
         message: message ?? this.message,
         fruits: fruits ?? this.fruits,
+        requestState: requestState ?? this.requestState,
       );
 
   factory CartState.initial() => const CartState();
@@ -25,5 +28,6 @@ class CartState extends Equatable {
   List<Object> get props => [
         message,
         fruits,
+        requestState,
       ];
 }
