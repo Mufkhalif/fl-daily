@@ -65,14 +65,15 @@ class DatabaseHelper {
     return result;
   }
 
-  // Future<int> removeWatchlistTv(TvModel tv) async {
-  //   final db = await database;
-  //   return await db!.delete(
-  //     _tblTvWatchlist,
-  //     where: 'id = ?',
-  //     whereArgs: [tv.id],
-  //   );
-  // }
+  Future<int> removeAllCart() async {
+    final db = await database;
+
+    final result = await db!.rawDelete(
+      "DELETE FROM $_tblFruit",
+    );
+
+    return result;
+  }
 
   Future<Map<String, dynamic>?> getFruitByType(int id) async {
     final db = await database;
@@ -108,20 +109,4 @@ class DatabaseHelper {
     final List<Map<String, dynamic>> results = await db!.query(_tblFruit);
     return results;
   }
-
-  // Future<int> updateAudioDownload(AudioClip audioClip) async {
-  //   final db = await database;
-
-  //   final result = await db!.rawUpdate(
-  //     "UPDATE $_tblFruit SET image = ?, url = ? WHERE id = ?",
-  //     [
-  //       audioClip.channel.urls.logoImage.original,
-  //       audioClip.urls.highMp3,
-  //       audioClip.id,
-  //     ],
-  //   );
-
-  //   return result;
-  // }
-
 }

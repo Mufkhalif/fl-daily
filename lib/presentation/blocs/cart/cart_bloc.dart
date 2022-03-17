@@ -98,5 +98,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<SetCurrentMessage>((event, emit) {
       emit(state.copyWith(message: ""));
     });
+
+    on<ClearAllCart>((event, emit) async {
+      final resAdd = await repository.removeAllCart();
+
+      resAdd.fold(
+        (failure) => emit(state.copyWith(message: failure.message)),
+        (message) => emit(state.copyWith(message: message)),
+      );
+    });
   }
 }

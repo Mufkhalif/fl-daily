@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:klikdaily/domain/models/fruit.dart';
 import 'package:klikdaily/presentation/blocs/cart/cart_bloc.dart';
+import 'package:klikdaily/presentation/pages/success_page.dart';
 import 'package:klikdaily/themes/theme.dart';
 import 'package:klikdaily/utils/format_money.dart';
 import 'package:klikdaily/widgets/modals/snackbar_confirm.dart';
@@ -133,9 +134,14 @@ class _CartTabState extends State<CartTab> {
                         ],
                       ),
                       const Spacer(),
-                      Text(
-                        'Bayar',
-                        style: bold.copyWith(color: Colors.white, fontSize: 18),
+                      GestureDetector(
+                        onTap: () =>
+                            Navigator.pushNamed(context, SuccesPage.routeName),
+                        child: Text(
+                          'Bayar',
+                          style:
+                              bold.copyWith(color: Colors.white, fontSize: 18),
+                        ),
                       ),
                       const SizedBox(width: 12),
                     ],

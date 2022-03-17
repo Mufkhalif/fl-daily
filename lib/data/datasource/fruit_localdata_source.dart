@@ -7,6 +7,7 @@ abstract class FruitLocalDataSource {
   Future<Fruit?> getFruitByType(int id);
   Future<String> updateTotalItemsFruit(Fruit fruit);
   Future<List<Fruit>> getCarts();
+  Future<String> removeAllCart();
 }
 
 class FruitLocalDataSourceImpl implements FruitLocalDataSource {
@@ -49,6 +50,16 @@ class FruitLocalDataSourceImpl implements FruitLocalDataSource {
     try {
       final result = await databaseHelper.getCarts();
       return result.map((data) => Fruit.fromMap(data)).toList();
+    } catch (e) {
+      throw DatabaseException(e.toString());
+    }
+  }
+
+  @override
+  Future<String> removeAllCart() async {
+    try {
+      await databaseHelper.removeAllCart();
+      return 'Removed all items from cart';
     } catch (e) {
       throw DatabaseException(e.toString());
     }

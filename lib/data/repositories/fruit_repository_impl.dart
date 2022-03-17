@@ -70,4 +70,14 @@ class FruitRepositoryImpl implements FruitRepository {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> removeAllCart() async {
+    try {
+      final result = await localDataSource.removeAllCart();
+      return Right(result);
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    }
+  }
 }

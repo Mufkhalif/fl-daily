@@ -8,6 +8,7 @@ import 'package:klikdaily/presentation/pages/app_intro_page.dart';
 import 'package:klikdaily/presentation/pages/search_page.dart';
 import 'package:klikdaily/presentation/pages/detail_page.dart';
 import 'package:klikdaily/presentation/pages/home_page.dart';
+import 'package:klikdaily/presentation/pages/success_page.dart';
 
 import 'injection.dart' as di;
 
@@ -37,8 +38,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        // home: const HomePage(),
-        home: AppIntroPage(),
+        home: const HomePage(),
+        // home: AppIntroPage(),
+        // home: SuccesPage(),
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
@@ -46,6 +48,8 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => const HomePage());
             case AppIntroPage.routeName:
               return MaterialPageRoute(builder: (_) => const AppIntroPage());
+            case SuccesPage.routeName:
+              return MaterialPageRoute(builder: (_) => const SuccesPage());
             case SearchPage.routeName:
               return MaterialPageRoute(builder: (_) => const SearchPage());
             case DetailPage.routeName:

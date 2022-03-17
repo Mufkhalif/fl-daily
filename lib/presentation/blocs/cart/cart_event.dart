@@ -46,3 +46,5 @@ class AddFruitToCartByTotal extends CartEvent {
   @override
   List<Object> get props => [fruit];
 }
+
+class ClearAllCart extends CartEvent {}
