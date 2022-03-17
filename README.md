@@ -34,7 +34,7 @@ Copyright © 2022 Mufkhalif
 
 Build With 💙
 
-[Homepage ScreenShot]: https://github.com/Mufkhalif/elemes-movie/blob/main/documentations/home.png?raw=true
+[Homepage ScreenShot]: https://github.com/Mufkhalif/elemes-movie/blob/main/documentations/movie_detail.png?raw=true
 [DetailPage ScreenShot]: https://github.com/Mufkhalif/elemes-movie/blob/main/documentations/movie_detail.png?raw=true
 [DetailCast ScreenShot]: https://github.com/Mufkhalif/elemes-movie/blob/main/documentations/detail_cast.png?raw=true
 [SearchPage ScreenShot]: https://github.com/Mufkhalif/elemes-movie/blob/main/documentations/search.png?raw=true
