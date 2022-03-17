@@ -79,7 +79,7 @@ class CardFruit extends StatelessWidget {
             Align(
               alignment: Alignment.topCenter,
               child: Container(
-                margin: EdgeInsets.only(top: 32),
+                margin: const EdgeInsets.only(top: 32),
                 child: Hero(
                   tag: fruit.id,
                   child: Image.asset(
@@ -123,7 +123,7 @@ class CardFruit extends StatelessWidget {
                 onTap: () =>
                     context.read<CartBloc>().add(AddFruitToCart(fruit)),
                 child: Container(
-                  margin: EdgeInsets.only(top: 40),
+                  margin: const EdgeInsets.only(top: 40),
                   padding: const EdgeInsets.all(1),
                   decoration: BoxDecoration(
                     color: Colors.orange,

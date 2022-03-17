@@ -52,6 +52,7 @@ class _DetailPageState extends State<DetailPage> {
               );
 
             context.read<CartBloc>().add(SetCurrentMessage());
+            context.read<CartBloc>().add(FetchingFruitToCart());
           }
         },
         child: Container(

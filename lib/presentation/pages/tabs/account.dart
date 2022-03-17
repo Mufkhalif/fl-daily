@@ -133,7 +133,7 @@ class _AccountTabState extends State<AccountTab> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 32,
             ),
           ],

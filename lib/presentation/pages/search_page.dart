@@ -112,7 +112,7 @@ class _SearchPageState extends State<SearchPage> {
                 }
 
                 return Container(
-                  margin: EdgeInsets.only(top: 50),
+                  margin: const EdgeInsets.only(top: 50),
                   child: Text(
                     "Masukan kata kunci untuk memulai pencarian ...",
                     textAlign: TextAlign.center,

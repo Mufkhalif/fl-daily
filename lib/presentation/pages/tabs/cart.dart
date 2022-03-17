@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:klikdaily/domain/models/fruit.dart';
 import 'package:klikdaily/presentation/blocs/cart/cart_bloc.dart';
+import 'package:klikdaily/presentation/pages/detail_page.dart';
 import 'package:klikdaily/presentation/pages/success_page.dart';
 import 'package:klikdaily/themes/theme.dart';
 import 'package:klikdaily/utils/format_money.dart';
@@ -155,80 +156,86 @@ class _CartTabState extends State<CartTab> {
     );
   }
 
-  Widget _renderItem(Fruit fruit) => Container(
-        margin: const EdgeInsets.only(bottom: 24),
-        child: Row(
-          children: [
-            Image.asset(
-              'assets/images/${fruit.assets}',
-              width: 62,
-              height: 62,
-            ),
-            const SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  fruit.name,
-                  style: bold.copyWith(fontSize: 16),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Rp ${formatMoney(fruit.price)}/kg',
-                  style: regular.copyWith(fontSize: 14, color: orange),
-                ),
-              ],
-            ),
-            const Spacer(),
-            GestureDetector(
-              onTap: () => fruit.totalItems == 1
-                  ? showDialogConfirm(
-                      context: context,
-                      title: fruit.name,
-                      onConfirm: () {
-                        context.read<CartBloc>().add(RemoveFruitToCart(fruit));
-                      },
-                    )
-                  : context.read<CartBloc>().add(RemoveFruitToCart(fruit)),
-              child: Container(
-                padding: const EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Icon(
-                  Icons.remove,
-                  color: green,
-                  size: 22,
+  Widget _renderItem(Fruit fruit) => GestureDetector(
+        onTap: () => Navigator.pushNamed(context, DetailPage.routeName,
+            arguments: fruit),
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 24),
+          child: Row(
+            children: [
+              Hero(
+                tag: fruit.id,
+                child: Image.asset(
+                  'assets/images/${fruit.assets}',
+                  width: 62,
+                  height: 62,
                 ),
               ),
-            ),
-            const SizedBox(
-              width: 12,
-            ),
-            Text(
-              fruit.totalItems.toString(),
-              style: bold.copyWith(fontSize: 14),
-            ),
-            const SizedBox(
-              width: 12,
-            ),
-            GestureDetector(
-              onTap: () =>
-                  context.read<CartBloc>()..add(AddFromListFruitToCart(fruit)),
-              child: Container(
-                padding: const EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  // color: green,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Icon(
-                  Icons.add,
-                  color: green,
-                  size: 22,
+              const SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    fruit.name,
+                    style: bold.copyWith(fontSize: 16),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Rp ${formatMoney(fruit.price)}/kg',
+                    style: regular.copyWith(fontSize: 14, color: orange),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              GestureDetector(
+                onTap: () => fruit.totalItems == 1
+                    ? showDialogConfirm(
+                        context: context,
+                        title: fruit.name,
+                        onConfirm: () => context
+                            .read<CartBloc>()
+                            .add(RemoveFruitToCart(fruit)),
+                      )
+                    : context.read<CartBloc>().add(RemoveFruitToCart(fruit)),
+                child: Container(
+                  padding: const EdgeInsets.all(1),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Icon(
+                    Icons.remove,
+                    color: green,
+                    size: 22,
+                  ),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(
+                width: 12,
+              ),
+              Text(
+                fruit.totalItems.toString(),
+                style: bold.copyWith(fontSize: 14),
+              ),
+              const SizedBox(
+                width: 12,
+              ),
+              GestureDetector(
+                onTap: () =>
+                    context.read<CartBloc>().add(AddFromListFruitToCart(fruit)),
+                child: Container(
+                  padding: const EdgeInsets.all(1),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Icon(
+                    Icons.add,
+                    color: green,
+                    size: 22,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       );
 }

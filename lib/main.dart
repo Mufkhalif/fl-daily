@@ -38,9 +38,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
-        // home: AppIntroPage(),
-        // home: SuccesPage(),
+        home: const AppIntroPage(),
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
