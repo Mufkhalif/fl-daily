@@ -6,8 +6,6 @@ import 'package:klikdaily/presentation/pages/tabs/cart.dart';
 import 'package:klikdaily/presentation/pages/tabs/home.dart';
 import 'package:klikdaily/themes/theme.dart';
 
-enum BottomNavItem { home, cart, account }
-
 class HomePage extends StatefulWidget {
   static const routeName = "/";
 
@@ -19,15 +17,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  late final PageController pageController;
-
-  BottomNavItem selectedBottomNavItem = BottomNavItem.home;
 
   @override
   void initState() {
     super.initState();
 
-    pageController = PageController(initialPage: selectedBottomNavItem.index);
     context.read<ProfileBloc>().add(FetchingProfile());
   }
 
@@ -35,24 +29,6 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
-  }
-
-  void switchBottomItem(BottomNavItem item) {
-    if (item == selectedBottomNavItem) return;
-    setState(() {
-      selectedBottomNavItem = item;
-      pageController.animateToPage(
-        selectedBottomNavItem.index,
-        duration: const Duration(milliseconds: 350),
-        curve: Curves.easeInOut,
-      );
-    });
-  }
-
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
   }
 
   @override
