@@ -4,7 +4,9 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:klikdaily/data/store/list_fruits.dart';
 import 'package:klikdaily/domain/models/fruit.dart';
+import 'package:klikdaily/presentation/pages/cart_page.dart';
 import 'package:klikdaily/themes/theme.dart';
+import 'package:klikdaily/utils/type_fruits.dart';
 
 extension ColorExtension on String {
   toColor() {
@@ -18,6 +20,8 @@ extension ColorExtension on String {
   }
 }
 
+enum BottomNavItem { home, cart, account }
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -25,22 +29,85 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-List<String> dummy = [
-  "Kentang",
-  "Kubis",
-];
-
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+  late final PageController pageController;
+
+  BottomNavItem selectedBottomNavItem = BottomNavItem.home;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController(initialPage: selectedBottomNavItem.index);
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  void switchBottomItem(BottomNavItem item) {
+    if (item == selectedBottomNavItem) return;
+    setState(() {
+      selectedBottomNavItem = item;
+      pageController.animateToPage(
+        selectedBottomNavItem.index,
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: DefaultTabController(
-          length: 4,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 24),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          selectedItemColor: green,
+          unselectedItemColor: Colors.grey,
+          iconSize: 22,
+          selectedLabelStyle: bold.copyWith(color: Colors.grey, fontSize: 12),
+          unselectedLabelStyle: regular.copyWith(fontSize: 12),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Beranda',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Keranjang',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Akun',
+            ),
+          ],
+        ),
+        body: _selectedIndex == 0
+            ? HomeTab()
+            : _selectedIndex == 1
+                ? CartTab()
+                : Container());
+  }
+}
+
+class HomeTab extends StatelessWidget {
+  const HomeTab({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: DefaultTabController(
+        length: listTabItem.length,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               SizedBox(
                 height: 42,
               ),
@@ -58,13 +125,10 @@ class _HomePageState extends State<HomePage> {
                     style: bold.copyWith(color: green, fontSize: 22),
                   ),
                   Spacer(),
-                  Container(
+                  Image.asset(
+                    'assets/images/onboarding_1.png',
                     width: 52,
                     height: 52,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(32),
-                    ),
                   )
                 ],
               ),
@@ -119,63 +183,55 @@ class _HomePageState extends State<HomePage> {
                 labelStyle: bold.copyWith(color: Colors.white),
                 unselectedLabelStyle: regular.copyWith(color: dark),
                 radius: 32,
-                onTap: (p0) => null,
-                tabs: [
-                  Tab(
-                    text: 'Favorite',
-                  ),
-                  Tab(
-                    text: 'Sawi',
-                  ),
-                  Tab(
-                    text: 'Kubis',
-                  ),
-                  Tab(
-                    text: 'Tomat',
-                  ),
-                ],
+                tabs: listTabItem.map((e) => Tab(text: e.name)).toList(),
               ),
               SizedBox(
                 height: 12,
               ),
               Expanded(
                 child: TabBarView(
-                  children: [
-                    Container(
-                      // padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 1,
-                        childAspectRatio: (1 / 1.3),
-                        shrinkWrap: true,
-                        children: _renderItems(),
-                      ),
-                    ),
-                    Container(
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      child: Text('asd'),
-                    )
-                  ],
+                  children: listTabItem
+                      .map((e) => ContainerListType(typeFruit: e.typeFruit))
+                      .toList(),
                 ),
               )
-            ]),
+            ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class ContainerListType extends StatelessWidget {
+  const ContainerListType({
+    Key? key,
+    required this.typeFruit,
+  }) : super(key: key);
+
+  final TypeFruit typeFruit;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: 2,
+      mainAxisSpacing: 1,
+      childAspectRatio: (1 / 1.3),
+      shrinkWrap: true,
+      children: _renderItems(),
     );
   }
 
   List<Widget> _renderItems() {
     List<Widget> items = [];
 
-    for (var i = 0; i < fruits.length; i++) {
+    final filterd =
+        fruits.where((element) => element.typeFruit == typeFruit).toList();
+
+    for (var i = 0; i < filterd.length; i++) {
       items.add(CardFruit(
-        fruit: fruits[i],
+        index: i,
+        fruit: filterd[i],
       ));
     }
 
@@ -187,21 +243,21 @@ class CardFruit extends StatelessWidget {
   const CardFruit({
     Key? key,
     required this.fruit,
+    required this.index,
   }) : super(key: key);
 
   final Fruit fruit;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    final isOdd = fruit.id % 2 == 0;
-
-    print(isOdd);
+    final isOdd = index % 2 == 0;
 
     return Container(
       padding: const EdgeInsets.all(12),
       margin: EdgeInsets.only(
-        left: isOdd ? 10 : 0,
-        right: isOdd ? 0 : 10,
+        left: isOdd ? 0 : 10,
+        right: isOdd ? 10 : 0,
         bottom: 14,
       ),
       height: 140,
@@ -251,7 +307,7 @@ class CardFruit extends StatelessWidget {
               padding: EdgeInsets.all(1),
               decoration: BoxDecoration(
                 color: Colors.orange,
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 Icons.add,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color dark = const Color(0xFF333E63);
+Color dark = const Color(0xFF080808);
 Color green = const Color(0xff1EA050);
 Color yellow = const Color(0xffFCAF05);
 Color grey = const Color(0xffE5E5E5).withOpacity(0.6);
@@ -22,7 +22,7 @@ TextStyle medium = TextStyle(
   color: dark,
 );
 
-TextStyle bold = TextStyle(
+TextStyle bold = const TextStyle(
   fontFamily: 'DmSans',
   fontWeight: FontWeight.w700,
   color: Colors.black,

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:klikdaily/themes/theme.dart';
 
@@ -27,6 +29,15 @@ class DetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: Icon(Icons.chevron_left),
+                  ),
+                  Spacer(),
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Icon(Icons.favorite, color: Colors.red),
                   ),
                 ],
               ),
@@ -83,14 +94,13 @@ class DetailPage extends StatelessWidget {
                     SizedBox(
                       height: 24,
                     ),
-                    Text(
-                      'Deskripsi',
-                      style: bold.copyWith(
+                    Text('Deskripsi',
+                        style: bold.copyWith(
                           fontSize: 16,
                           decoration: TextDecoration.underline,
                           decorationColor: orange,
-                          decorationThickness: 4),
-                    ),
+                          decorationThickness: 4,
+                        )),
                     SizedBox(height: 8),
                     Text(
                       'Sawi hijan mengandung folat, kalium, Vitamin C, dan Vitamin B6 dan rendah kolestrol, perpaduan ini membantu menjaga kesehatan jantung. Vitamin b6 dan folat mencegah penumpukan senyawa uang dikenal sebagai homocysteine',
@@ -115,8 +125,63 @@ class DetailPage extends StatelessWidget {
                               style: bold.copyWith(fontSize: 16, color: orange),
                             ),
                           ],
-                        )
+                        ),
+                        Spacer(),
+                        Container(
+                          padding: EdgeInsets.all(1),
+                          decoration: BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.remove,
+                            color: Colors.white,
+                            size: 22,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          '2 kg',
+                          style: bold.copyWith(fontSize: 14),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(1),
+                          decoration: BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 22,
+                          ),
+                        ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 44,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: green,
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Masukkan ke Keranjang',
+                          style: bold.copyWith(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 200,
