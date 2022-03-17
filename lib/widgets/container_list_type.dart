@@ -22,7 +22,7 @@ class ContainerListType extends StatelessWidget {
     return GridView.count(
       crossAxisCount: 2,
       mainAxisSpacing: 1,
-      childAspectRatio: (1 / 1.3),
+      childAspectRatio: (1 / 1.2),
       shrinkWrap: true,
       children: _renderItems(),
     );
@@ -77,19 +77,22 @@ class CardFruit extends StatelessWidget {
         child: Stack(
           children: [
             Align(
-              alignment: Alignment.center,
-              child: Hero(
-                tag: fruit.id,
-                child: Image.asset(
-                  'assets/images/${fruit.assets}',
-                  width: 72,
-                  height: 72,
+              alignment: Alignment.topCenter,
+              child: Container(
+                margin: EdgeInsets.only(top: 32),
+                child: Hero(
+                  tag: fruit.id,
+                  child: Image.asset(
+                    'assets/images/${fruit.assets}',
+                    width: 72,
+                    height: 72,
+                  ),
                 ),
               ),
             ),
             Positioned(
               left: 0,
-              bottom: 0,
+              bottom: 10,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -99,6 +102,7 @@ class CardFruit extends StatelessWidget {
                       Text(
                         fruit.name,
                         style: bold,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(
                         height: 4,
@@ -119,6 +123,7 @@ class CardFruit extends StatelessWidget {
                 onTap: () =>
                     context.read<CartBloc>().add(AddFruitToCart(fruit)),
                 child: Container(
+                  margin: EdgeInsets.only(top: 40),
                   padding: const EdgeInsets.all(1),
                   decoration: BoxDecoration(
                     color: Colors.orange,

@@ -56,9 +56,6 @@ class _DetailPageState extends State<DetailPage> {
         },
         child: Container(
           color: widget.fruit.bgColor.toColor(),
-          padding: EdgeInsets.only(
-            top: 72,
-          ),
           child: Stack(
             children: [
               Align(
@@ -235,7 +232,7 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 24),
+                margin: EdgeInsets.only(left: 24, right: 24, top: 72),
                 child: Row(
                   children: [
                     GestureDetector(
@@ -245,18 +242,17 @@ class _DetailPageState extends State<DetailPage> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(24),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              spreadRadius: 2,
+                              blurRadius: 12,
+                              offset: const Offset(4, 4),
+                            ),
+                          ],
                         ),
                         child: Icon(Icons.chevron_left),
                       ),
-                    ),
-                    Spacer(),
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      child: Icon(Icons.favorite, color: Colors.red),
                     ),
                   ],
                 ),

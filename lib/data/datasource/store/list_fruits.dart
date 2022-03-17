@@ -1,7 +1,7 @@
 import 'package:klikdaily/domain/models/fruit.dart';
 import 'package:klikdaily/utils/type_fruits.dart';
 
-List<Fruit> fruits = [
+List<Fruit> fruits = const [
   Fruit(
     id: 1,
     name: 'Kentang',
@@ -105,5 +105,37 @@ List<Fruit> fruits = [
     assets: 'patato.png',
     bgColor: 'FFE4A3',
     typeFruit: TypeFruit.potato,
+  ),
+  Fruit(
+    id: 14,
+    name: 'Kubis California',
+    price: 7600,
+    assets: 'cauliflower.png',
+    bgColor: 'DAECFF',
+    typeFruit: TypeFruit.cabbage,
+  ),
+  Fruit(
+    id: 15,
+    name: 'Kubis Semarang',
+    price: 4600,
+    assets: 'cauliflower.png',
+    bgColor: 'DAECFF',
+    typeFruit: TypeFruit.cabbage,
+  ),
+  Fruit(
+    id: 16,
+    name: 'Kubis Malang',
+    price: 4300,
+    assets: 'cauliflower.png',
+    bgColor: 'DAECFF',
+    typeFruit: TypeFruit.cabbage,
+  ),
+  Fruit(
+    id: 17,
+    name: 'Kubis Manis',
+    price: 10300,
+    assets: 'cauliflower.png',
+    bgColor: 'DAECFF',
+    typeFruit: TypeFruit.cabbage,
   ),
 ];
