@@ -30,7 +30,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<AddFruitToCart>((event, emit) async {
       final result = await repository.isAddedInCart(event.fruit.id);
 
-      result.fold(
+      await result.fold(
         (failure) async {
           final resAdd = await repository.addCart(event.fruit);
 
@@ -40,7 +40,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           );
         },
         (fruit) async {
-          final updateFruit = fruit.copyWith(totalItems: fruit.totalItems + 1);
+          final updateFruit = fruit.copyWith(
+              totalItems: fruit.totalItems + event.fruit.totalItems);
 
           final resUpdate = await repository.updateTotalItemsFruit(updateFruit);
 
@@ -70,11 +71,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
       if (filterd != null) {
         await repository.updateTotalItemsFruit(filterd);
-
-        // resUpdate.fold(
-        //   (failure) => print("FAILED ADD CART : ${failure.message}"),
-        //   (message) => print("SUCCESS ADD FROM CART"),
-        // );
       }
     });
 
@@ -96,57 +92,36 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
       if (filterd != null) {
         await repository.updateTotalItemsFruit(filterd);
-
-        // resUpdate.fold(
-        //   (failure) => print("FAILED REMOVE CART : ${failure.message}"),
-        //   (message) => print("SUCCESS REMOVE FROM CART"),
-        // );
       }
-
-      // final indexEmpty =
-      //     state.fruits.indexWhere((element) => element.id == event.fruit.id);
-
-      // final newList = state.fruits;
-
-      // newList[indexEmpty]
-      //     .copyWith(totalItems: newList[indexEmpty].totalItems - 1);
-
-      // print(newList);
-
-      // final result = await repository.isAddedInCart(event.fruit.id);
-
-      // result.fold(
-      //   (failure) async {
-      //     print("REMOVE FAILURE EVENT MESSAGE ${failure.message}");
-      //     // final resAdd = await repository.addCart(event.fruit);
-
-      //     // resAdd.fold(
-      //     //   (failure) => print(failure.message),
-      //     //   (message) => print(message),
-      //     // );
-      //   },
-      //   (fruit) async {
-      //     print("REMOVE SUCCESS EVENT MESSAGE BEFORE ${fruit.totalItems}");
-
-      //     final updateFruit = fruit.copyWith(totalItems: fruit.totalItems - 1);
-
-      //     print("REMOVE SUCCESS EVENT MESSAGE AFTER ${updateFruit.totalItems}");
-
-      // final resUpdate = await repository.updateTotalItemsFruit(updateFruit);
-
-      // resUpdate.fold(
-      //   (failure) => print(failure.message),
-      //   (message) => print(message),
-      // );
-
-      //     // print(updateFruit.totalItems);
-      //     // updateTotalItemsFruit/
-      //   },
-      // );
     });
 
     on<SetCurrentMessage>((event, emit) {
       emit(state.copyWith(message: ""));
     });
+
+    // on<AddFruitToCartByTotal>((event, emit) async {
+    //   final result = await repository.isAddedInCart(event.fruit.id);
+
+    //   await result.fold(
+    //     (failure) async {
+    //       final resAdd = await repository.addCart(event.fruit);
+
+    //       resAdd.fold(
+    //         (failure) => null,
+    //         (message) => emit(state.copyWith(message: message)),
+    //       );
+    //     },
+    //     (fruit) async {
+    //       final updateFruit = fruit.copyWith(totalItems: fruit.totalItems + 1);
+
+    //       final resUpdate = await repository.updateTotalItemsFruit(updateFruit);
+
+    //       resUpdate.fold(
+    //         (failure) => emit(state.copyWith(message: failure.message)),
+    //         (message) => emit(state.copyWith(message: message)),
+    //       );
+    //     },
+    //   );
+    // });
   }
 }

@@ -9,7 +9,7 @@ class Fruit extends Equatable {
     required this.assets,
     required this.bgColor,
     required this.typeFruit,
-    this.totalItems = 0,
+    this.totalItems = 1,
   });
 
   final int id;

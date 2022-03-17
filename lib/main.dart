@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:klikdaily/domain/models/fruit.dart';
 import 'package:klikdaily/presentation/blocs/cart/cart_bloc.dart';
-import 'package:klikdaily/presentation/pages/cart_page.dart';
+import 'package:klikdaily/presentation/pages/tabs/cart.dart';
 import 'package:klikdaily/presentation/pages/detail_page.dart';
 import 'package:klikdaily/presentation/pages/home_page.dart';
 
@@ -28,8 +29,30 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: HomePage(),
-        // home: const DetailPage(),
-        // home: CartPage(),
+        initialRoute: '/',
+        onGenerateRoute: (RouteSettings settings) {
+          switch (settings.name) {
+            case HomePage.routeName:
+              return MaterialPageRoute(builder: (_) => const HomePage());
+            case DetailPage.routeName:
+              final item = settings.arguments as Fruit;
+              return MaterialPageRoute(
+                builder: (_) => DetailPage(
+                  fruit: item,
+                ),
+              );
+            default:
+              return MaterialPageRoute(
+                builder: (_) {
+                  return const Scaffold(
+                    body: Center(
+                      child: Text('Page not found :('),
+                    ),
+                  );
+                },
+              );
+          }
+        },
       ),
     );
   }

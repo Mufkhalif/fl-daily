@@ -56,7 +56,7 @@ class DatabaseHelper {
         fruit.id,
         fruit.name,
         fruit.price,
-        1,
+        fruit.totalItems,
         typeToStringFruit(fruit.typeFruit),
         fruit.assets,
       ],

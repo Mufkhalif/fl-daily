@@ -37,3 +37,12 @@ class AddFromListFruitToCart extends CartEvent {
 }
 
 class SetCurrentMessage extends CartEvent {}
+
+class AddFruitToCartByTotal extends CartEvent {
+  final Fruit fruit;
+
+  const AddFruitToCartByTotal(this.fruit);
+
+  @override
+  List<Object> get props => [fruit];
+}
