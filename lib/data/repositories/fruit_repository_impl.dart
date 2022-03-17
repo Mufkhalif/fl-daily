@@ -1,14 +1,22 @@
+import 'dart:io';
+
 import 'package:klikdaily/data/datasource/fruit_localdata_source.dart';
+import 'package:klikdaily/data/datasource/fruit_remotedata_source.dart';
 import 'package:klikdaily/domain/models/fruit.dart';
 import 'package:dartz/dartz.dart';
+import 'package:klikdaily/domain/models/profile.dart';
 import 'package:klikdaily/domain/repositories/fruit_repository.dart';
 import 'package:klikdaily/utils/exception.dart';
 import 'package:klikdaily/utils/failure.dart';
 
 class FruitRepositoryImpl implements FruitRepository {
   final FruitLocalDataSource localDataSource;
+  final FruitRemoteDataSource remoteDataSource;
 
-  FruitRepositoryImpl({required this.localDataSource});
+  FruitRepositoryImpl({
+    required this.localDataSource,
+    required this.remoteDataSource,
+  });
 
   @override
   Future<Either<Failure, String>> addCart(Fruit fruit) async {
@@ -48,6 +56,18 @@ class FruitRepositoryImpl implements FruitRepository {
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ProfileResponse>> getProfile() async {
+    try {
+      final result = await remoteDataSource.getProfile();
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
 }

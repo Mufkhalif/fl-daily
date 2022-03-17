@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:klikdaily/domain/models/fruit.dart';
 import 'package:klikdaily/presentation/blocs/cart/cart_bloc.dart';
+import 'package:klikdaily/presentation/blocs/profile/profile_bloc.dart';
+import 'package:klikdaily/presentation/pages/tabs/account.dart';
 import 'package:klikdaily/presentation/pages/tabs/cart.dart';
 import 'package:klikdaily/presentation/pages/detail_page.dart';
 import 'package:klikdaily/presentation/pages/home_page.dart';
@@ -25,9 +27,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<CartBloc>(),
         ),
+        BlocProvider(
+          create: (_) => di.locator<ProfileBloc>(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        // home: AccountPage(),
         home: HomePage(),
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
@@ -36,19 +42,12 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => const HomePage());
             case DetailPage.routeName:
               final item = settings.arguments as Fruit;
-              return MaterialPageRoute(
-                builder: (_) => DetailPage(
-                  fruit: item,
-                ),
-              );
+              return MaterialPageRoute(builder: (_) => DetailPage(fruit: item));
             default:
               return MaterialPageRoute(
                 builder: (_) {
                   return const Scaffold(
-                    body: Center(
-                      child: Text('Page not found :('),
-                    ),
-                  );
+                      body: Center(child: Text('Page not found :(')));
                 },
               );
           }

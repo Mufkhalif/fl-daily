@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:klikdaily/presentation/blocs/profile/profile_bloc.dart';
+import 'package:klikdaily/presentation/pages/tabs/account.dart';
 import 'package:klikdaily/presentation/pages/tabs/cart.dart';
 import 'package:klikdaily/presentation/pages/tabs/home.dart';
 import 'package:klikdaily/themes/theme.dart';
@@ -25,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     pageController = PageController(initialPage: selectedBottomNavItem.index);
+    context.read<ProfileBloc>().add(FetchingProfile());
   }
 
   void _onItemTapped(int index) {
@@ -81,6 +85,6 @@ class _HomePageState extends State<HomePage> {
             ? const HomeTab()
             : _selectedIndex == 1
                 ? const CartTab()
-                : Container());
+                : AccountTab());
   }
 }
