@@ -38,7 +38,7 @@ class _DetailPageState extends State<DetailPage> {
       body: BlocListener<CartBloc, CartState>(
         listenWhen: (previous, current) => previous.message != current.message,
         listener: (context, state) {
-          if (state.message.isNotEmpty) {
+          if (state.message.isNotEmpty && state.message != "") {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(

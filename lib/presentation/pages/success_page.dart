@@ -66,7 +66,7 @@ class _SuccesPageState extends State<SuccesPage> {
                 ),
                 child: Center(
                   child: Text(
-                    'Kembeli',
+                    'Kembali',
                     style: bold.copyWith(
                       color: Colors.white,
                       fontSize: 16,
