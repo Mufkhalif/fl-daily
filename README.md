@@ -1,7 +1,6 @@
-# KlikDaily 🍅 Technical Test
+# Vegetables greocery 🍅
 
-this app for technical test @klikdaily build with flutter 2.10.1 and clean architecture
-support to running in ios and android
+A Flutter UI template of a Grocery Shopping App I found on Uplabs.
 
 <br>
 
@@ -36,21 +35,6 @@ flutter pub get
 ```
 flutter run
 ```
-
-
-## Packges
-
-- http: ^0.13.3
-- dartz: ^0.10.0-nullsafety.2
-- equatable: ^2.0.3
-- get_it: ^7.1.3
-- flutter_bloc: ^8.0.1
-- sqflite_sqlcipher: ^2.1.0
-- encrypt: ^5.0.1
-- intl: ^0.17.0
-- readmore: ^2.1.0
-- lottie: ^1.2.1
-- intro_slider: ^3.0.
 
 
 <br>

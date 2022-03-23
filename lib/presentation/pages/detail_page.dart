@@ -237,7 +237,10 @@ class _DetailPageState extends State<DetailPage> {
                 child: Row(
                   children: [
                     GestureDetector(
-                      onTap: () => Navigator.pop(context),
+                      onTap: () {
+                        Scaffold.of(context).hideCurrentSnackBar();
+                        Navigator.pop(context);
+                      },
                       child: Container(
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
